@@ -32,16 +32,18 @@ public_users.post("/register", (req, res) => {
         username: username,
         password: password,
       });
-      return res.send("New account registered!");
+      return res.send({
+        msg: "New account registered!",
+      });
     } else {
-      return res.send(
-        "Username has already exist. Please, try another username!"
-      );
+      return res.send({
+        msg: "Username has already exist. Please, try another username!",
+      });
     }
   } else {
-    return res.send(
-      "Registration failed, Please provide username and password"
-    );
+    return res.send({
+      msg: "Registration failed, Please provide username and password",
+    });
   }
 });
 
@@ -85,7 +87,7 @@ public_users.get("/isbn/:isbn", function (req, res) {
     })
     .catch((err) => {
       console.log("Searching stops");
-      return res.send(err);
+      return res.send({ msg: err });
     });
 });
 
@@ -113,7 +115,7 @@ public_users.get("/author/:author", function (req, res) {
     })
     .catch((err) => {
       console.log("Searching stops");
-      return res.send(err);
+      return res.send({ msg: err });
     });
 });
 
@@ -139,7 +141,7 @@ public_users.get("/title/:title", function (req, res) {
     })
     .catch((err) => {
       console.log("Searching stops");
-      return res.send(err);
+      return res.send({ msg: err });
     });
 });
 
@@ -151,7 +153,7 @@ public_users.get("/review/:isbn", function (req, res) {
       if (Object.keys(books[index].reviews).length != 0) {
         return res.send(books[index].reviews);
       } else {
-        return res.send("No one reviews for the book");
+        return res.send({ msg: "No one reviews for the book" });
       }
     }
   }

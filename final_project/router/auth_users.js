@@ -44,14 +44,14 @@ regd_users.post("/login", (req, res) => {
       const sessionToken = token;
       req.session.auth = { sessionToken };
       console.log(`Logged in : ${username}`);
-      return res.send("Login success!");
+      return res.send({ msg: "Login success!" });
     } else if (isValid(username)) {
-      return res.send("Login failed: Wrong password");
+      return res.send({ msg: "Login failed: Wrong password" });
     } else {
-      return res.send("Login failed : Account not found");
+      return res.send({ msg: "Login failed : Account not found" });
     }
   } else {
-    return res.send("Login failed: Please fill the login form");
+    return res.send({ msg: "Login failed: Please fill the login form" });
   }
 });
 
@@ -68,18 +68,18 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
           const book = { ...books[index] };
           book.reviews = { ...book.reviews, [username]: newReview };
           books[index] = book;
-          return res.send("Review changed succesfully");
+          return res.send({ msg: "Review changed succesfully" });
         } else {
           const book = { ...books[index] };
           book.reviews = { ...book.reviews, [username]: newReview };
           books[index] = book;
-          return res.send("Review added succesfully");
+          return res.send({ msg: "Review added succesfully" });
         }
       }
     }
-    return res.send("Book cannot be found");
+    return res.send({ msg: "Book cannot be found" });
   } else {
-    return res.send("Please fill the review form");
+    return res.send({ msg: "Please fill the review form" });
   }
 });
 
@@ -94,9 +94,9 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
         book.reviews = { ...book.reviews };
         delete book.reviews[username];
         books[index] = book;
-        return res.send("Review deleted succesfully");
+        return res.send({ msg: "Review deleted succesfully" });
       } else {
-        return res.send("You have not added any review yet");
+        return res.send({ msg: "You have not added any review yet" });
       }
     }
   }
@@ -105,10 +105,10 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
 regd_users.post("/auth/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.send("Cannot log out");
+      return res.send({ msg: "Cannot log out" });
     } else {
       console.log(`Logged out : ${req.user.username}`);
-      return res.send("Logout success!");
+      return res.send({ msg: "Logout success!" });
     }
   });
 });

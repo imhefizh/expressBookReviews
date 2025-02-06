@@ -15,7 +15,9 @@ let books = {
   6: {
     author: "Unknown",
     title: "One Thousand and One Nights",
-    reviews: {},
+    reviews: {
+      tony: "I love this book",
+    },
     isbn: 51351,
   },
   7: { author: "Unknown", title: "Nj\u00e1l's Saga", reviews: {} },
